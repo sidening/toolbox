@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/cms")
-public class cmsController {
+public class CmsSController {
     @Autowired
     UserRepository userRepository;
     @Autowired
