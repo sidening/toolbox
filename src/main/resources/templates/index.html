@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <!-- 移动设备优先 -->
@@ -13,6 +13,26 @@
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<span class="glyphicon glyphicon-search"></span>
+<div class="container">
+
+    <div class="jumbotron text-center" style="margin-bottom:0">
+        <p>一念清净 ,烈焰成池. . .</p>
+    </div>
+
+    <ul id="myTab" class="nav nav-tabs">
+        <li class="active"><a href="#home" data-toggle="tab">Movie</a></li>
+        <li><a href="#ios" data-toggle="tab">Book</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content" >
+        <div class="tab-pane fade in active" id="home">
+            <div class="container" style="line-height: 4;letter-spacing: 5px;">
+                <button type="button" class="btn btn-default btn-lg" th:each="webSite:${webSites}">
+                    <a target="_blank" th:href="@{'http://'+${webSite.link}}" th:text="${webSite.getName()}"></a>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
