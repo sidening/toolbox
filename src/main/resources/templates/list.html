@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -39,18 +39,13 @@
                 <th width="120">ID</th>
                 <th>名称</th>
                 <th>链接</th>
-                <th>简介</th>
-                <th>分类</th>
                 <th>操作</th>
             </tr>
-            <c:forEach items="${list}" var="book">
-                <tr>
-                    <td><input type="checkbox" name="id[]" value="1" />
-                        ${book.id}</td>
-                    <td>${book.name}</td>
-                    <td>${book.author}</td>
-                    <td>${book.number}</td>
-                    <td>${book.type}</td>
+                <tr th:each="webSite:${webSites}">
+                    <td th:value="${webSite.id}"><input type="checkbox" name="id[]" value="1" />
+                        </td>
+                    <td th:text="${webSite.name}"></td>
+                    <td th:text="${webSite.link}"></td>
 
                     <td>
                         <div class="button-group">
@@ -58,12 +53,11 @@
                                href="AdminServlet?method=updateBookById&id=${book.id}"> <span
                                     class="icon-edit"></span> 修改
                             </a> <a class="button border-red"
-                                    href="AdminServlet?method=deleteBook&id=${book.id}">
+                                    th:href="@{/cms/delete(id=${webSite.id})}">
                             <span class="icon-trash-o"></span> 删除
                         </a>
                         </div>
                     </td>
-            </c:forEach>
             </tr>
             <tr>
                 <td colspan="8">

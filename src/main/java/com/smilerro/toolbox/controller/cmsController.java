@@ -13,7 +13,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("/cms")
-public class CmsController {
+public class cmsController {
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -28,7 +28,11 @@ public class CmsController {
         String password = user.getPassword();
         user = userRepository.findByUsernameAndPassword(username, password);
         if (user!=null){
-            model.addAttribute("user",user);
+            List<WebSite> all = webSiteRepository.findAll();
+            if (all!=null){
+                model.addAttribute("webSites",all);
+                model.addAttribute("user",user);
+            }
             return "list";
         }else{
             model.addAttribute("msg","login faild!");
@@ -40,7 +44,17 @@ public class CmsController {
     public String userLogin(Model model){
         List<WebSite> all = webSiteRepository.findAll();
         if (all!=null){
-            model.addAttribute("webList",all);
+            model.addAttribute("webSites",all);
+        }
+        return "list";
+    }
+
+    @RequestMapping("/delete")
+    public String userLogin(Model model,WebSite webSite){
+        webSiteRepository.delete(webSite);
+        List<WebSite> all = webSiteRepository.findAll();
+        if (all!=null){
+            model.addAttribute("webSites",all);
         }
         return "list";
     }

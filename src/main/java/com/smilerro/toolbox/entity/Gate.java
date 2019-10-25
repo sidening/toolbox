@@ -10,16 +10,18 @@ import javax.persistence.Id;
 
 /**
  * @author ：Skf
- * @date ：Created in 2019/10/25 0025 16:29
+ * @date ：Created in 2019/10/25 0025 16:53
+ * 分类
  */
 @Entity
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
-public class User {
+public class Gate {
     @Id
     @GeneratedValue(generator = "jpa-uuid")
     private String id;
-    private String username;
-    private String password;
+
+    private String name;
+
 
     public String getId() {
         return id;
@@ -29,19 +31,11 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getName() {
+        return name;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setName(String name) {
+        this.name = name;
     }
 }
