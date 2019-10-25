@@ -9,24 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
-/**
- * @author ：Skf
- * @date ：Created in 2019/10/25 0025 10:41
- */
 @Controller
-@RequestMapping("/")
-public class MainController {
+@RequestMapping("/cms")
+public class cmsController {
     @Autowired
     WebSiteRepository webSiteRepository;
-    @RequestMapping("/")
-    public String index(Model model){
+    @RequestMapping("/add")
+    public String add(Model model){
         List<WebSite> all = webSiteRepository.findAll();
         model.addAttribute("webSites",all);
         return "index";
     }
-
-
-
-
 
 }
