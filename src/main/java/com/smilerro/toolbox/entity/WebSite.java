@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * @author ：Skf
@@ -28,6 +29,11 @@ public class WebSite {
      */
     private String link;
     /**
+     * 小分类
+     */
+    @ManyToOne
+    private Category category;
+    /**
      * 简介
      */
     private String profile;
@@ -39,6 +45,14 @@ public class WebSite {
      * 状态
      */
     private Integer status;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public String getId() {
         return id;

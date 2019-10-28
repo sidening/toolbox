@@ -1,50 +1,27 @@
 package com.smilerro.toolbox.entity;
 
-
-
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * @author ：Skf
- * @date ：Created in 2019/10/25 0025 16:53
- * 分类
+ * @date ：Created in 2019/10/28 0028 9:30
+ * 二级分类
  */
 @Entity
 @GenericGenerator(name = "jpa-uuid", strategy = "uuid")
-public class Gate {
+public class Category {
     @Id
     @GeneratedValue(generator = "jpa-uuid")
     private String id;
 
     private String name;
-    /**
-     * 序号
-     */
-    private Integer num;
-    /**
-     * 有效性
-     */
-    private Integer status=1;
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public Integer getNum() {
-        return num;
-    }
-
-    public void setNum(Integer num) {
-        this.num = num;
-    }
+    @ManyToOne
+    private Gate gate;
 
     public String getId() {
         return id;
@@ -60,5 +37,13 @@ public class Gate {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Gate getGate() {
+        return gate;
+    }
+
+    public void setGate(Gate gate) {
+        this.gate = gate;
     }
 }
