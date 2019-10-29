@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @SpringBootTest
@@ -44,8 +45,22 @@ class ToolboxApplicationTests {
 
     @Test
     void addUser() {
-
-
+        String s = "11,22,33,44,55";
+        List<Integer> list = new ArrayList();
+        int num=0;
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c !=','){
+                num = num*10+c-48;
+            }else{
+               list.add(num);
+               num =0;
+            }
+        }
+        list.add(num);
+        for (Object o:list) {
+            System.out.println(o);
+        }
     }
     @Test
     void addGate() {

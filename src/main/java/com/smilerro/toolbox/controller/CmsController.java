@@ -20,7 +20,7 @@ public class CmsController {
     WebSiteRepository webSiteRepository;
     @RequestMapping("/login")
     public String loginPage(Model model){
-        return "loginCms";
+        return "cms/loginCms";
     }
     @RequestMapping("/userLogin")
     public String userLogin(Model model, User user){

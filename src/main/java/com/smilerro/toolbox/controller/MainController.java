@@ -44,10 +44,10 @@ public class MainController {
 
     @GetMapping("/gateData")
     @ResponseBody
-    public Map gate() {
+    public List gate() {
         List<WebSite> webSites = webSiteRepository.findAll();
         Map<String, Map> res = new HashMap();
-
+        List resList = new ArrayList();
         for (WebSite webSite : webSites) {
             Category category = webSite.getCategory();
             Gate gate = category.getGate();
@@ -58,7 +58,13 @@ public class MainController {
             map.put(category.getName(),list);
             list.add(webSite);
         }
-        return res;
+        for (Map.Entry<String ,Map> entry:res.entrySet()) {
+            Map value = entry.getValue();
+            String key = entry.getKey();
+            value.put("id",key);
+            resList.add(value);
+        }
+        return resList;
     }
 
 

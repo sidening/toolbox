@@ -11,28 +11,23 @@
             height: 100%;
             background: rgb(237, 237, 237);
         }
+        .jumbotron{
+            color: #adadad;
+            background: url("/static/img/1.jpg");
+        }
     </style>
 </head>
 <body>
 <div class="container" style="height: 100%;background: #f7f7f7;">
 
-    <div class="jumbotron text-center" style="margin-bottom:0">
+    <div class="jumbotron text-center" >
         <p th:text="${slogan}"></p>
     </div>
 
     <ul id="myTab" class="nav nav-tabs">
-        <li th:each="gate,gateStart:${gates}" ><a th:href="${gate.id}" th:text="${gate.name}" data-toggle="tab"></a></li>
+        <li th:each="gate,index:${gates}" th:class="${index.first}?'active'" ><a th:href="'#'+${gate.id}" th:text="${gate.name}" data-toggle="tab"></a></li>
     </ul>
     <div id="myTabContent" class="tab-content" style="background: #ffffff">
-        <!--
-        <div class="tab-pane fade in active" id="home">
-            <div class="container" style="line-height: 4;letter-spacing: 5px;">
-                <button type="button" class="btn btn-default btn-lg" th:each="webSite:${webSites}">
-                    <a target="_blank" th:href="@{'http://'+${webSite.link}}" th:text="${webSite.getName()}"></a>
-                </button>
-            </div>
-        </div>
-        -->
     </div>
 </div>
 
@@ -46,10 +41,31 @@
             dataType: "json",
             success: function (json) {
                 $.each(json, function (i, item) {
-                    $('#myTabContent').append(
-                        '<div class="tab-pane fade in active" id="'+i+ '">'+
-                            i+
-                        '</div>');
+                    if (i==0){
+                        $('#myTabContent').append(
+                            '<div class="tab-pane fade in active" id="'+item.id+ '">'+
+                            '<div class="container" style="line-height: 3;" id="'+'son'+item.id+'">'+'</div></div>'
+                        );
+                    }else{
+                        $('#myTabContent').append(
+                            '<div class="tab-pane fade" id="'+item.id+ '">'+
+                            '<div class="container" style="line-height: 3" id="'+'son'+item.id+'">'+'</div></div>'
+                        );
+                    }
+                    $.each(item,function(j ,jtem){
+                        if (j!='id'){
+                            $('#son'+item.id).append(
+                                '<p><span class="glyphicon glyphicon-menu-down">'+j+'</p>'
+                            );
+                            $.each(jtem,function(h,htem){
+                                $('#son'+item.id).append(
+                                    '<button type="button" class="btn btn-default btn-lg">'+
+                                    '<a target="_blank" href="http://'+htem.link+'">'+htem.name+'</a>'+
+                                    '</button>'
+                                );
+                            });
+                        }
+                    });
                 });
             }
         });
