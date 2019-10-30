@@ -123,18 +123,10 @@
             <!-- Sidebar Menu -->
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header">操作选项</li>
-                <li class="active"><a href="#"><i class="fa fa-link"></i> <span>站点管理</span></a></li>
-                <li><a href="#"><i class="fa fa-link"></i> <span>Another Link</span></a></li>
-                <li class="treeview">
-                    <a href="#"><i class="fa fa-link"></i> <span>Multilevel</span>
-                        <span class="pull-right-container">
-                <i class="fa fa-angle-left pull-right"></i>
-              </span>
+                <li class="active">
+                    <a href="http://www.baidu.com" target="menuFrame" >
+                        <i class="fa fa-link"></i> <span>用户管理</span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li><a href="#">Link in level 2</a></li>
-                        <li><a href="#">Link in level 2</a></li>
-                    </ul>
                 </li>
             </ul>
         </section>
@@ -142,78 +134,10 @@
 
     <div class="content-wrapper">
         <section class="content">
-            <div class="nav-tabs-custom">
-                <ul class="nav nav-tabs" id="myTab">
-                    <li role="presentation" id="nav_home" data-id="home" class="active"><a href="#home">首页</a></li>
-                </ul>
-                <div id="iframe_box" class="tab-content">
-                    <div class="tab-pane active" id="home">
-                        <div class="row">
-                            <div class="col-lg-3 col-xs-6">
-                                <!-- small box -->
-                                <div class="small-box bg-aqua">
-                                    <div class="inner">
-                                        <h3>4545 条</h3>
-                                        <p>24小时内新增抓取文章</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-android-chat"></i>
-                                    </div>
-                                    <a data-id="fish" href="javascript:void(0);" class="small-box-footer moreDetail">查看更多<i
-                                            class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-lg-3 col-xs-6">
-                                <!-- small box -->
-                                <div class="small-box bg-green">
-                                    <div class="inner">
-                                        <h3>1010 条</h3>
-                                        <p>24小时内新增视频播放量</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-stats-bars"></i>
-                                    </div>
-                                    <a data-id="programplaycount" href="javascript:void(0);"
-                                       class="small-box-footer moreDetail">查看更多<i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-lg-3 col-xs-6">
-                                <!-- small box -->
-                                <div class="small-box bg-yellow">
-                                    <div class="inner">
-                                        <h3>1000 条</h3>
-                                        <p>一周内新增节目</p>
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-person-add"></i>
-                                    </div>
-                                    <a data-id="program" href="javascript:void(0);" class="small-box-footer moreDetail">查看更多<i
-                                            class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                            <div class="col-lg-3 col-xs-6">
-                                <!-- small box -->
-                                <div class="small-box bg-red" id="generateList" status="" progress=true>
-                                    <div class="inner">
-                                        <h3>榜单状况</h3>
-                                        <p> .</p>
+            <iframe id="menuFrame" name="menuFrame" src="main.htm" style="overflow:visible;" scrolling="yes"
+                    frameborder="no" height="100%" width="100%">
 
-                                    </div>
-                                    <div class="icon">
-                                        <i class="ion ion-pie-graph"></i>
-                                    </div>
-                                    <a href="#" class="small-box-footer">&nbsp;</a>
-                                </div>
-                            </div>
-                            <!-- ./col -->
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+            </iframe>
         </section>
     </div>
 
@@ -230,5 +154,11 @@
 <script src="/js/jquery.min.js"></script>
 <script src="/js/bootstrap.min.js"></script>
 <script src="/js/adminlte.min.js"></script>
+<script type="text/javascript">
+    $(function(){
+        var hh=window.screen.availHeight -100
+        $('.content').css('height',hh+'px')
+    })
+</script>
 </body>
 </html>
