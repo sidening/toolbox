@@ -18,45 +18,8 @@ public class CmsController {
     UserRepository userRepository;
     @Autowired
     WebSiteRepository webSiteRepository;
-    @RequestMapping("/login")
+    @RequestMapping("/")
     public String loginPage(Model model){
-        return "cms/loginCms";
+        return "cms/starter";
     }
-    @RequestMapping("/userLogin")
-    public String userLogin(Model model, User user){
-        String username = user.getUsername();
-        String password = user.getPassword();
-        user = userRepository.findByUsernameAndPassword(username, password);
-        if (user!=null){
-            List<WebSite> all = webSiteRepository.findAll();
-            if (all!=null){
-                model.addAttribute("webSites",all);
-                model.addAttribute("user",user);
-            }
-            return "list";
-        }else{
-            model.addAttribute("msg","login faild!");
-            return "loginCms";
-        }
-    }
-
-    @RequestMapping("/webList")
-    public String userLogin(Model model){
-        List<WebSite> all = webSiteRepository.findAll();
-        if (all!=null){
-            model.addAttribute("webSites",all);
-        }
-        return "list";
-    }
-
-    @RequestMapping("/delete")
-    public String userLogin(Model model,WebSite webSite){
-        webSiteRepository.delete(webSite);
-        List<WebSite> all = webSiteRepository.findAll();
-        if (all!=null){
-            model.addAttribute("webSites",all);
-        }
-        return "list";
-    }
-
 }
