@@ -22,4 +22,8 @@ public class CmsController {
     public String loginPage(Model model){
         return "cms/starter";
     }
+    @RequestMapping("/w")
+    public String loginP(Model model){
+        return "cms/index";
+    }
 }
