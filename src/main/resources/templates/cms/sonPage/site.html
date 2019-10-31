@@ -4,10 +4,40 @@
     <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<div class="container" style="height: 100%;background: #f7f7f7;">
-    <div class="jumbotron text-center" >
-        <p>站点管理</p>
-    </div>
+<div class="container">
+    <table class="table table-bordered table-hover">
+        <tr>
+            <th>名称</th>
+            <th>连接</th>
+            <th>操作</th>
+        </tr>
+        <tr>
+            <form action="/cms/site/save" method="post">
+                <td><input type="text" name="name"></td>
+                <td><input type="text" name="link"></td>
+                <td>
+                    <input type="submit" value="增加"/></span>
+                </td>
+            </form>
+        </tr>
+        <tr th:each="site,index:${sites}">
+            <form action="/cms/site/save" method="post">
+                <td>
+                    <input type="hidden" name="id" th:value="${site.id}">
+                    <input type="text" name="num" th:value="${site.name}">
+                </td>
+                <td><input type="text" name="name" th:value="${site.link}"></td>
+                <td>
+                    <button>
+                        <a th:href="@{'/cms/site/delete?id='+${site.id}}">
+                            删除</span>
+                        </a>&nbsp
+                    </button>
+                    <input type="submit" value="保存"/></span>
+                </td>
+            </form>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

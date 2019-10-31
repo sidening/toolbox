@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@SpringBootTest
+//@SpringBootTest
 class ToolboxApplicationTests {
     @Autowired
     CategoryRepository categoryRepository;
@@ -130,6 +130,26 @@ class ToolboxApplicationTests {
 
         for (int i = 0; i < arr.length ; i++) {
             System.out.println(arr[i]);
+        }
+    }
+    @Test
+    void addCat(){
+        int[] arr = {6,3,4,7,8,1,5};
+        int temp =0;
+        for (int i = 0; i <arr.length ; i++) {
+            for (int j = i+1; j <arr.length+1 ; j++) {
+                if (arr[i]<arr[j]){
+                   temp=arr[j];
+                    arr[j]=arr[i];
+                    arr[i]=temp;
+                }
+            }
+        }
+
+
+
+        for (int a:arr) {
+            System.out.println(a);
         }
     }
 }
