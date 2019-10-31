@@ -1428,76 +1428,46 @@ var addTabs = function (options) {
         title: "新页面",
         targetType: "iframe-tab"
     };
-
+    // 合并对象
     options = $.extend(true, defaultTabOptions, options);
 
     if (options.urlType === "relative") {
-        // var url = window.location.protocol + '//' + window.location.host + "/";
         var basePath = window.location.pathname + "/../";
         options.url = basePath + options.url;
     }
-
     var pageId = options.id;
 
     //判断这个id的tab是否已经存在,不存在就新建一个
     if (findTabPanel(pageId) === null) {
 
         //创建新TAB的title
-        // title = '<a  id="tab_' + pageId + '"  data-id="' + pageId + '"  class="menu_tab" >';
-
         var $title = $('<a href="javascript:void(0);"></a>').attr(pageIdField, pageId).addClass("menu_tab");
-
         var $text = $("<span class='page_tab_title'></span>").text(options.title).appendTo($title);
-        // title += '<span class="page_tab_title">' + options.title + '</span>';
-
         //是否允许关闭
         if (options.close) {
-
-            //var $i = $('<span class="btn close page_tab_close" onclick="closeTab(this);">&times;</span>').attr(pageIdField, pageId).appendTo($title);
             var $i = $("<i class='page_tab_close' style='cursor: pointer' onclick='closeTab(this);'>&times;</i>").attr(pageIdField, pageId).appendTo($title);
-            //var $i = $("<i class='fa fa-remove page_tab_close' style='cursor: pointer' onclick='closeTab(this);'></i>").attr(pageIdField, pageId).appendTo($title);
-            // title += ' <i class="fa fa-remove page_tab_close" style="cursor: pointer;" data-id="' + pageId + '" onclick="closeTab(this)"></i>';
         }
-
         //加入TABS
         $(".page-tabs-content").append($title);
-
-
         var $tabPanel = $('<div role="tabpanel" class="tab-pane"></div>').attr(pageIdField, pageId);
-
         if (options.content) {
             //是否指定TAB内容
             $tabPanel.append(options.content);
         } else {
-            //没有内容，使用IFRAME打开链接
-
             App.blockUI({
                 target: '#tab-content',
                 boxed: true,
-                message: '加载中......'//,
-                // animate: true
+                message: '加载中......'
             });
-
             var $iframe = $("<iframe></iframe>").attr("src", options.url).css("width", "100%").attr("frameborder", "no").attr("id", "iframe_" + pageId).addClass("tab_iframe").attr(pageIdField, pageId);
-            //frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="yes"  allowtransparency="yes"
-
             //iframe 加载完成事件
             $iframe.load(function () {
                 App.unblockUI('#tab-content');//解锁界面
                 App.fixIframeCotent();//修正高度
             });
-
             $tabPanel.append($iframe);
-
         }
-
-        // $tab = $(content);
         $("#tab-content").append($tabPanel);
-
-        //iframe 加载完成事件
-        /*$tab.find("iframe").load(function () {
-         App.fixIframeCotent();
-         });*/
     }
 
     activeTabByPageId(pageId);
@@ -1801,31 +1771,16 @@ $(function () {
                 closeTabByPageId(pageId);
             }
         }
-        //{
-        //    text: "在新窗口打开",
-        //    action: function (e, $selector, rightClickEvent) {
-
-        //        var pageId = getPageId(findTabElement(rightClickEvent.target));
-        //        var url = getTabUrlById(pageId);
-        //        window.open(url);
-
-        //    }
-        //}
-//            {text: 'Open in new Window', href: '#'},
-//            {divider: true},
-//            {text: 'Copy', href: '#'},
-//            {text: 'Dafuq!?', href: '#'}
     ]);
-
 });
 
+
 (function ($) {
+    //加载左侧菜单
     $.fn.sidebarMenu = function (options) {
         options = $.extend({}, $.fn.sidebarMenu.defaults, options || {});
         var $menu_ul = $(this);
         var level = 0;
-        //  target.addClass('nav');
-        // target.addClass('nav-list');
         if (options.data) {
             init($menu_ul, options.data, level);
         }

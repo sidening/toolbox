@@ -8,15 +8,9 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <title>管理系统</title>
-
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Font Awesome -->
     <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    <!-- Theme style -->
     <link href="/adminlte/css/AdminLTE.lite.css" rel="stylesheet" />
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-     folder instead of downloading all of them to reduce the load. -->
     <link href="/adminlte/css/skins/all-skins.min.css" rel="stylesheet" />
     <style type="text/css">
         html {
@@ -55,12 +49,8 @@
             font-weight: bold;
         }
     </style>
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/r29/html5.min.js"></script>
     <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -137,26 +127,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <!-- Control Sidebar Toggle Button -->
                         <li>
                             <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                        </li>
-                    </ul>
-                </div>
-
-                <div class="navbar navbar-custom-menu" style="padding-right:20px;">
-                    <ul class="nav navbar-nav">
-                        <li>
-                            <a class="subsystitle">子系统1</a>
-                        </li>
-                        <li>
-                            <a class="subsystitle">子系统2</a>
-                        </li>
-                        <li>
-                            <a class="subsystitle">子系统3</a>
-                        </li>
-                        <li>
-                            <a class="subsystitle">子系统4</a>
                         </li>
                     </ul>
                 </div>
@@ -176,7 +148,18 @@
                     </div>
                 </form>
                 <ul class="sidebar-menu">
-
+                    <li class="treeview " data-level="1">
+                        <a style="padding-left:20px" class="nav-link"
+                            onclick="addTabs({id:'90011',title: '分类管理',close: true,url: 'gate',urlType: 'relative'});">
+                            <i class="fa fa-circle-o"></i><span class="title menu-text">分类管理</span>
+                        </a>
+                    </li>
+                    <li class="treeview " data-level="1">
+                        <a style="padding-left:20px" class="nav-link"
+                            onclick="addTabs({id:'90012',title: '站点管理',close: true,url: 'site',urlType: 'relative'});">
+                            <i class="fa fa-circle-o"></i><span class="title menu-text">站点管理</span>
+                        </a>
+                    </li>
                 </ul>
             </section>
         </aside>
@@ -254,16 +237,13 @@
 
     <!-- AdminLTE App -->
     <script src="/adminlte/js/adminlte.lite.js"></script>
-    <!-- AdminLTE for demo purposes -->
     <script src="/adminlte/js/adminlte.skin.js"></script>
     <script src="/adminlte/js/jquery.blockUI.min.js"></script>
     <!--tabs-->
     <script src="/adminlte/js/app_iframe.js"></script>
 
     <script type="text/javascript">
-        /**
-         * 本地搜索菜单
-         */
+         //本地搜索菜单
         function search_menu() {
             //要搜索的值
             var text = $('input[name=q]').val();
@@ -291,163 +271,19 @@
         }
 
         $(function () {
-            //        console.log(window.location);
-
             App.setbasePath("../");
             App.setGlobalImgPath("dist/img/");
-
-            // addTabs({
-            //     id: '10008',
-            //     title: '欢迎页',
-            //     close: false,
-            //     url: 'about.html',
-            //     urlType: "relative"
-            // });
+            //加载首页
             addTabs({
                 id: "90021",
-                text: "Bing",
-                url: "https://cn.bing.com",
+                text: "首页",
+                url: "/cms/indexContent",
                 targetType: "iframe-tab",
                 icon: "fa fa-circle-o",
                 urlType: 'abosulte'
             });
-
             App.fixIframeCotent();
-
-            /*addTabs({
-             id: '10009',
-             title: '404',
-             close: true,
-             url: 'UI/buttons_iframe2.html'
-             });*/
-
-            /*
-             <li class="treeview">
-             <a href="#">
-             <i class="fa fa-edit"></i> <span>Forms</span>
-             <span class="pull-right-container">
-             <i class="fa fa-angle-left pull-right"></i>
-             </span>
-             </a>
-             <ul class="treeview-menu">
-             <li><a href="forms/general.html"><i class="fa fa-circle-o"></i> General Elements</a></li>
-             <li><a href="forms/advanced.html"><i class="fa fa-circle-o"></i> Advanced Elements</a></li>
-             <li><a href="forms/editors.html"><i class="fa fa-circle-o"></i> Editors</a></li>
-             </ul>
-             </li>
-             */
-            var menus = [
-                {
-                    id: "9000",
-                    text: "header",
-                    icon: "",
-                    isHeader: true
-                },
-                {
-                    id: "9001",
-                    text: "UI Elements",
-                    icon: "fa fa-laptop",
-                    children: [
-                        {
-                            id: "90011",
-                            text: "buttons",
-                            icon: "fa fa-circle-o",
-                            url: "UI/buttons_iframe.html",
-                            targetType: "iframe-tab"
-                        },
-                        {
-                            id: "90012",
-                            text: "icons",
-                            url: "UI/icons_iframe.html",
-                            targetType: "iframe-tab",
-                            icon: "fa fa-circle-o"
-                        },
-                        {
-                            id: "90013",
-                            text: "general",
-                            url: "UI/general_iframe.html",
-                            targetType: "iframe-tab",
-                            icon: "fa fa-circle-o"
-                        },
-                        {
-                            id: "90014",
-                            text: "modals",
-                            url: "UI/modals_iframe.html",
-                            targetType: "iframe-tab",
-                            icon: "fa fa-circle-o"
-                        },
-                        {
-                            id: "90015",
-                            text: "sliders",
-                            url: "UI/sliders_iframe.html",
-                            targetType: "iframe-tab",
-                            icon: "fa fa-circle-o"
-                        },
-                        {
-                            id: "90016",
-                            text: "timeline",
-                            url: "UI/timeline_iframe.html",
-                            targetType: "iframe-tab",
-                            icon: "fa fa-circle-o"
-                        }
-                    ]
-                },
-                {
-                    id: "9002",
-                    text: "Forms",
-                    icon: "fa fa-edit",
-                    children: [
-                        {
-                            id: "90021",
-                            text: "advanced",
-                            url: "forms/advanced_iframe.html",
-                            targetType: "iframe-tab",
-                            icon: "fa fa-circle-o"
-                        },
-                        {
-                            id: "90022",
-                            text: "general",
-                            url: "forms/general_iframe.html",
-                            targetType: "iframe-tab",
-                            icon: "fa fa-circle-o"
-                        },
-                        {
-                            id: "90023",
-                            text: "editors",
-                            url: "forms/editors_iframe.html",
-                            targetType: "iframe-tab",
-                            icon: "fa fa-circle-o"
-                        },
-                        {
-                            id: "90024",
-                            text: "百度",
-                            url: "https://www.baidu.com",
-                            targetType: "iframe-tab",
-                            icon: "fa fa-circle-o",
-                            urlType: 'abosulte'
-                        }
-                    ]
-                }
-            ];
             $('.sidebar-menu').sidebarMenu({ data: menus });
-
-            // 动态创建菜单后，可以重新计算 SlimScroll
-            // $.AdminLTE.layout.fixSidebar();
-
-            /*if ($.AdminLTE.options.sidebarSlimScroll) {
-                if (typeof $.fn.slimScroll != 'undefined') {
-                    //Destroy if it exists
-                    var $sidebar = $(".sidebar");
-                    $sidebar.slimScroll({destroy: true}).height("auto");
-                    //Add slimscroll
-                    $sidebar.slimscroll({
-                        height: ($(window).height() - $(".main-header").height()) + "px",
-                        color: "rgba(0,0,0,0.2)",
-                        size: "3px"
-                    });
-                }
-            }*/
-
         });
     </script>
 
