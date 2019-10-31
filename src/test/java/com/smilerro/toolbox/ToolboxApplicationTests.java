@@ -89,5 +89,47 @@ class ToolboxApplicationTests {
         categoryRepository.saveAll(categorys);
 
     }
+    @Test
+    void addCate(){
+        int[] arr = {1,3,5,2,7};
+        //1.从[0-结尾]数据中 把最大值交换到 0 位置
+        for (int i = 0; i < arr.length; i++) {
+            //如果当前位置的值大于0位置的值 , 交换
+            if(arr[i]>arr[0]){
+                int temp = arr[i];
+                arr[i] = arr[0];
+                arr[0] = temp;
+            }
+        }
+        for (int i = 0; i < arr.length ; i++) {
+            System.out.println(arr[i]);
+        }
+        //2.从[1-结尾]数据中 把最大值交换到 1 位置
+        for (int i = 1; i < arr.length; i++) {
+            //如果当前位置的值大于1位置的值 , 交换
+            if(arr[i]>arr[1]){
+                int temp = arr[i];
+                arr[i] = arr[1];
+                arr[1] = temp;
+            }
+        }
 
+        for (int j = 0; j < arr.length; j++) {
+            int n = j;
+            //1.从[n-结尾]数据中 把最大值交换到 n 位置
+            for (int i = n; i < arr.length; i++) {
+                //如果当前位置的值大于n位置的值 , 交换
+                if(arr[i]>arr[n]){
+                    int temp = arr[n];
+                    arr[n] = arr[i];
+                    arr[i] = temp;
+                }
+            }
+
+        }
+
+        for (int i = 0; i < arr.length ; i++) {
+            System.out.println(arr[i]);
+        }
+    }
 }
