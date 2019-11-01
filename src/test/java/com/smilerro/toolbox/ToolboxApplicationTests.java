@@ -12,11 +12,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-//@SpringBootTest
+@SpringBootTest
 class ToolboxApplicationTests {
     @Autowired
     CategoryRepository categoryRepository;
@@ -152,4 +155,16 @@ class ToolboxApplicationTests {
             System.out.println(a);
         }
     }
+    @Autowired
+    EntityManagerFactory entityManagerFactory;
+    @Test
+    void test001(){
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        String hql = "select gate " +
+                "from "+Gate.class.getName()+" as gate ";
+        Query query = entityManager.createQuery(hql,Gate.class);
+        List<Gate> resultList = query.getResultList();
+        System.out.println();
+    }
+
 }

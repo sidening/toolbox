@@ -7,6 +7,8 @@ import com.smilerro.toolbox.repository.GateRepository;
 import com.smilerro.toolbox.repository.WebSiteRepository;
 import org.hibernate.sql.Template;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,7 +47,11 @@ public class MainController {
     @GetMapping("/gateData")
     @ResponseBody
     public List gate() {
-        List<WebSite> webSites = webSiteRepository.findAll();
+        String sql = "select w from "+WebSite.class.getName()+" as w " +
+                "LEFT JOIN "+Category.class.getName()+" c on c.id=w.category.id " +
+                "LEFT JOIN "+Gate.class.getName()+" g on g.id=c.gate.id " +
+                "order by g.num ASC";
+        List<WebSite> webSites = webSiteRepository.queryByHql(sql);
         Map<String, Map> res = new HashMap();
         List resList = new ArrayList();
         for (WebSite webSite : webSites) {

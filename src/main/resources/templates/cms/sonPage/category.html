@@ -7,10 +7,10 @@
 <div class="container">
     <br>
     <div>
-        <form action="/cms/site" method="post">
-            <select name="category.id">
+        <form action="/cms/category" method="post">
+            <select name="gate.id">
                 <option >选择分类</option>
-                <option th:value ="${category.id}" th:text="${category.name}" th:each="category:${categorys}"></option>
+                <option th:value ="${gate.id}" th:text="${gate.name}" th:each="gate:${gates}"></option>
             </select>
             <input type="submit" value="分类查询"/>
         </form>
@@ -19,17 +19,15 @@
     <table class="table table-bordered table-hover">
         <tr>
             <th>名称</th>
-            <th>连接</th>
             <th>分类</th>
             <th>操作</th>
         </tr>
         <tr>
-            <form action="/cms/site/save" method="post">
+            <form action="/cms/category/save" method="post">
                 <td><input type="text" name="name"></td>
-                <td><input type="text" name="link"></td>
                 <td>
-                    <select name="category.id">
-                        <option th:value ="${category.id}" th:text="${category.name}" th:each="category:${categorys}"></option>
+                    <select name="gate.id">
+                        <option th:value ="${gate.id}" th:text="${gate.name}" th:each="gate:${gates}"></option>
                     </select>
                 </td>
                 <td>
@@ -37,22 +35,20 @@
                 </td>
             </form>
         </tr>
-        <tr th:each="site,index:${sites}">
-            <form action="/cms/site/save" method="post">
+        <tr th:each="category,index:${categorys}">
+            <form action="/cms/category/save" method="post">
                 <td>
-                    <input type="hidden" name="id" th:value="${site.id}">
-                    <input type="text" name="name" th:value="${site.name}">
+                    <input type="hidden" name="id" th:value="${category.id}">
+                    <input type="text" name="name" th:value="${category.name}">
                 </td>
-                <td><input type="text" name="link" th:value="${site.link}"></td>
                 <td>
-                    <select name="category.id">
-                        <option th:value ="${site.category.id}" th:text="${site.category.name}"></option>
-                        <option th:value ="${category.id}" th:text="${category.gate.name}+'>'+${category.name}" th:each="category:${categorys}"></option>
+                    <select name="gate.id">
+                        <option th:value ="${gate.id}" th:text="${gate.name}" th:each="gate:${gates}"></option>
                     </select>
                 </td>
                 <td>
                     <button>
-                        <a th:href="@{'/cms/site/delete?id='+${site.id}}">
+                        <a th:href="@{'/cms/category/delete?id='+${category.id}}">
                             删除</span>
                         </a>&nbsp
                     </button>

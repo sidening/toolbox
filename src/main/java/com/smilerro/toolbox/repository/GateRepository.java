@@ -9,6 +9,6 @@ import java.util.List;
  * @author ：Skf
  * @date ：Created in 2019/10/28 0028 9:49
  */
-public interface GateRepository extends JpaRepository<Gate,String> {
+public interface GateRepository extends BaseRepository<Gate,String> {
     List<Gate> findAllByStatusOrderByNumAsc(Integer status);
 }

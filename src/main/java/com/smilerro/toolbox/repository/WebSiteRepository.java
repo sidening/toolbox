@@ -11,7 +11,9 @@ import java.util.List;
  * @author ：Skf
  * @date ：Created in 2019/10/25 0025 14:00
  */
-public interface WebSiteRepository extends JpaRepository<WebSite,String> {
+public interface WebSiteRepository extends BaseRepository<WebSite,String> {
 
     List<WebSite> findByCategory_Gate(Gate gate);
+//    List<WebSite> findByCategoryExistsOrderByCategoryGateNumAsc();
+
 }
