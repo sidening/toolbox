@@ -15,6 +15,9 @@
             color: #adadad;
             /*background: url("/static/img/1.jpg");*/
         }
+        #myTabContent{
+
+        }
     </style>
 </head>
 <body>
@@ -25,9 +28,14 @@
     </div>
 
     <ul id="myTab" class="nav nav-tabs">
-        <li th:each="gate,index:${gates}" th:class="${index.first}?'active'" ><a th:href="'#'+${gate.id}" th:text="${gate.name}" data-toggle="tab"></a></li>
+        <li th:each="gate,index:${gates}" th:class="${index.first}?'active'" >
+            <a th:href="'#'+${gate.id}" th:text="${gate.name}" onclick="showPage(this)"></a>
+        </li>
     </ul>
     <div id="myTabContent" class="tab-content" style="background: #ffffff">
+        <div th:each="gate,index:${gates}" th:id="${gate.id}" th:class="${index.first}?'tab-pane fade in active':'tab-pane fade'" >
+            <h3 th:text="${gate.name}"></h3>
+        </div>
     </div>
 </div>
 
@@ -35,41 +43,17 @@
 <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(function(){
-        $.ajax({
-            type: "GET",
-            url: "/gateData",
-            dataType: "json",
-            success: function (json) {
-                $.each(json, function (i, item) {
-                    if (i==0){
-                        $('#myTabContent').append(
-                            '<div class="tab-pane fade in active" id="'+item.id+ '">'+
-                            '<div class="container" style="line-height: 3;" id="'+'son'+item.id+'">'+'</div></div>'
-                        );
-                    }else{
-                        $('#myTabContent').append(
-                            '<div class="tab-pane fade" id="'+item.id+ '">'+
-                            '<div class="container" style="line-height: 3" id="'+'son'+item.id+'">'+'</div></div>'
-                        );
-                    }
-                    $.each(item,function(j ,jtem){
-                        if (j!='id'){
-                            $('#son'+item.id).append(
-                                '<p><span class="glyphicon glyphicon-menu-down">'+j+'</p>'
-                            );
-                            $.each(jtem,function(h,htem){
-                                $('#son'+item.id).append(
-                                    '<button type="button" class="btn btn-default btn-lg">'+
-                                    '<a target="_blank" href="http://'+htem.link+'">'+htem.name+'</a>'+
-                                    '</button>'
-                                );
-                            });
-                        }
-                    });
-                });
-            }
-        });
-    });
+        //页面加载完毕 , 渲染首页首页数据
+        showPage($("#myTab a").first());
+    })
+
+    function showPage(tabdom){
+        var id = $(tabdom).attr("href");
+        $(tabdom).tab('show');
+        $(''+id).html('<h3>正在加载数据 . . .</h3>');
+        var eval1 = eval("id",id);
+        $(''+id).load("/gateData",{"gateId":id});
+    }
 </script>
 </body>
 </html>

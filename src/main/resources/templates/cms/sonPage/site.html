@@ -20,7 +20,8 @@
         <tr>
             <th>名称</th>
             <th>连接</th>
-            <th>分类</th>
+            <th>一级分类</th>
+            <th>二级分类</th>
             <th>操作</th>
         </tr>
         <tr>
@@ -28,8 +29,13 @@
                 <td><input type="text" name="name"></td>
                 <td><input type="text" name="link"></td>
                 <td>
+                    <select gate="gate">
+                        <option>请选择</option>
+                    </select>
+                </td>
+                <td>
                     <select name="category.id">
-                        <option th:value ="${category.id}" th:text="${category.name}" th:each="category:${categorys}"></option>
+                        <option>请先选择一级分类</option>
                     </select>
                 </td>
                 <td>
@@ -62,5 +68,8 @@
         </tr>
     </table>
 </div>
+<sctipt>
+    document.getElementsByTagName('head')[0].innerHTML=document.getElementsByTagName('head')[0].innerHTML+"<script src='/js/site.js'></script>"
+</sctipt>
 </body>
 </html>

@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/cms/gate")
@@ -36,5 +39,17 @@ public class CmsGateController {
         List<Gate> gates = gateRepository.findAllByStatusOrderByNumAsc(1);
         model.addAttribute("gates",gates);
         return "cms/sonPage/gate";
+    }
+    @RequestMapping("/options")
+    public List getOptions(){
+        List<Gate> list = gateRepository.findAll();
+        List res = new ArrayList();
+        for (Gate gate:list) {
+            Map map = new HashMap();
+            map.put("name",gate.getName());
+            map.put("id",gate.getId());
+            res.add(map);
+        }
+        return res;
     }
 }

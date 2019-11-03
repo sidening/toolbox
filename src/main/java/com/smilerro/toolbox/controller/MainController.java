@@ -14,13 +14,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author ：Skf
@@ -44,33 +42,33 @@ public class MainController {
         return "index";
     }
 
-    @GetMapping("/gateData")
+    @RequestMapping("/gateData")
     @ResponseBody
-    public List gate() {
-        String sql = "select w from "+WebSite.class.getName()+" as w " +
-                "LEFT JOIN "+Category.class.getName()+" c on c.id=w.category.id " +
-                "LEFT JOIN "+Gate.class.getName()+" g on g.id=c.gate.id " +
-                "order by g.num ASC";
-        List<WebSite> webSites = webSiteRepository.queryByHql(sql);
-        Map<String, Map> res = new HashMap();
-        List resList = new ArrayList();
+    public String gate(String gateId) {
+        if (gateId.startsWith("#")){
+            gateId =gateId.substring(1);
+        }
+        String res = "";
+        Gate example = new Gate();
+        example.setId(gateId);
+        List<WebSite> webSites = webSiteRepository.findByCategory_Gate(example);
+        Map<String, String> map = new HashMap();
         for (WebSite webSite : webSites) {
-            Category category = webSite.getCategory();
-            Gate gate = category.getGate();
-            String id = gate.getId();
-            Map<String , List> map = res.get(id)==null?new HashMap(): res.get(id);
-            res.put(id,map);
-            List list = map.get(category.getName())==null?new ArrayList():map.get(category.getName());
-            map.put(category.getName(),list);
-            list.add(webSite);
+            String name = webSite.getCategory().getName();
+            String s = map.get(name);
+            if(s==null||s.equals("")){
+                s = "</br></br><p><span class=\"glyphicon glyphicon-menu-down\">"+name+"</p>";
+            }
+            s = s+"&nbsp<a target=\"_blank\" class=\"btn btn-default btn-sm\" href=\""+webSite.getLink()+"\">"+webSite.getName()+"</a>";
+            map.put(name,s);
         }
-        for (Map.Entry<String ,Map> entry:res.entrySet()) {
-            Map value = entry.getValue();
-            String key = entry.getKey();
-            value.put("id",key);
-            resList.add(value);
+        //'<p><span class="glyphicon glyphicon-menu-down">'+j+'</p>'
+        //'<a target="_blank" class="btn btn-default btn-sm" href="http://'+htem.link+'">'+htem.name+'</a>'
+        Collection<String> values = map.values();
+        for (String str :values) {
+            res = res+str;
         }
-        return resList;
+        return res;
     }
 
 
