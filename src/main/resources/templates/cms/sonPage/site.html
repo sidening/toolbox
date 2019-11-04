@@ -51,9 +51,13 @@
                 </td>
                 <td><input type="text" name="link" th:value="${site.link}"></td>
                 <td>
+                    <select gate="gate">
+                        <option th:value ="${site.category.gate.id}" th:text="${site.category.gate.name}"></option>
+                    </select>
+                </td>
+                <td>
                     <select name="category.id">
                         <option th:value ="${site.category.id}" th:text="${site.category.name}"></option>
-                        <option th:value ="${category.id}" th:text="${category.gate.name}+'>'+${category.name}" th:each="category:${categorys}"></option>
                     </select>
                 </td>
                 <td>
@@ -68,8 +72,25 @@
         </tr>
     </table>
 </div>
-<sctipt>
-    document.getElementsByTagName('head')[0].innerHTML=document.getElementsByTagName('head')[0].innerHTML+"<script src='/js/site.js'></script>"
-</sctipt>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    //https://blog.csdn.net/weixin_39877284/article/details/82024185  二级联动
+    $(function () {
+        $.ajax({
+            type: "GET",
+            url: "/cms/gate/options",
+            dataType: "json",
+            success: function (json) {
+                $.each(json, function (i, item) {
+                    console.log(i);
+                    $("select[gate=gate]").append(
+                        '<option value="'+item.id+'">'+item.name+'</option>'
+                    )
+                })
+            }
+        });
+        $(select[gate='gate']).append()
+    })
+</script>
 </body>
 </html>
