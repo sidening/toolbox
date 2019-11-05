@@ -74,23 +74,50 @@
 </div>
 <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-    //https://blog.csdn.net/weixin_39877284/article/details/82024185  二级联动
+    var secdoneOptions = {};
     $(function () {
+        //为所有一级分类添加选项
         $.ajax({
             type: "GET",
             url: "/cms/gate/options",
             dataType: "json",
             success: function (json) {
                 $.each(json, function (i, item) {
-                    console.log(i);
+                    secdoneOptions[item.id]=[];
                     $("select[gate=gate]").append(
                         '<option value="'+item.id+'">'+item.name+'</option>'
                     )
                 })
             }
         });
-        $(select[gate='gate']).append()
+        //为所有一级分类绑定onchange事件
+        $("select[gate=gate]").change(function () {
+            changeOption(this);
+        });
     })
+    function changeOption(s) {
+        var gateId = s.value;
+        if (secdoneOptions[gateId].length==0){
+            $.ajax({
+                type: "POST",
+                url: "/cms/category/options",
+                data: {"gateId":gateId},
+                dataType: "json",
+                success: function (json) {
+                    console.log(json);
+                    var nextSelect = $(s).parent().next().children("select").get(0);
+                    $(nextSelect).empty();
+                    $(nextSelect).append('<option>请选择</option>');
+                    $.each(json,function (i,item) {
+                        console.log(item);
+                        $(nextSelect).append('<option value="'+item.id+'">'+item.name+'</option>');
+                    })
+                }
+            })
+        }
+
+
+    }
 </script>
 </body>
 </html>

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@SpringBootTest
+//@SpringBootTest
 class ToolboxApplicationTests {
     @Autowired
     CategoryRepository categoryRepository;
@@ -165,6 +165,26 @@ class ToolboxApplicationTests {
         Query query = entityManager.createQuery(hql,Gate.class);
         List<Gate> resultList = query.getResultList();
         System.out.println();
+    }
+
+    //冒泡算法：
+    @Test
+    public void uuu() {
+        int[] arr = {12, 23, 24, 54, 13, 63, 21};
+
+        for (int i = 0; i < arr.length; i++) {
+
+            for (int j = i; j < arr.length; j++) {
+                if (arr[j] > arr[i]) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+        }
+        for (int i = 0; i < arr.length; i++) {
+            System.out.println(arr[i]);
+        }
     }
 
 }
