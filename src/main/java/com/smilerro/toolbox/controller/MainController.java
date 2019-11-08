@@ -62,9 +62,7 @@ public class MainController {
             s = s+"&nbsp<a target=\"_blank\" class=\"btn btn-default btn-sm\" href=\""+webSite.getLink()+"\">"+webSite.getName()+"</a>";
             map.put(name,s);
         }
-        //'<p><span class="glyphicon glyphicon-menu-down">'+j+'</p>'
-        //'<a target="_blank" class="btn btn-default btn-sm" href="http://'+htem.link+'">'+htem.name+'</a>'
-        Collection<String> values = map.values();
+            Collection<String> values = map.values();
         for (String str :values) {
             res = res+str;
         }
