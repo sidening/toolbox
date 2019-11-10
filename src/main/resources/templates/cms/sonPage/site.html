@@ -51,9 +51,13 @@
                 </td>
                 <td><input type="text" name="link" th:value="${site.link}"></td>
                 <td>
+                    <select gate="gate">
+                        <option th:value ="${site.category.gate.id}" th:text="${site.category.gate.name}"></option>
+                    </select>
+                </td>
+                <td>
                     <select name="category.id">
                         <option th:value ="${site.category.id}" th:text="${site.category.name}"></option>
-                        <option th:value ="${category.id}" th:text="${category.gate.name}+'>'+${category.name}" th:each="category:${categorys}"></option>
                     </select>
                 </td>
                 <td>
@@ -68,8 +72,52 @@
         </tr>
     </table>
 </div>
-<sctipt>
-    document.getElementsByTagName('head')[0].innerHTML=document.getElementsByTagName('head')[0].innerHTML+"<script src='/js/site.js'></script>"
-</sctipt>
+<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var secdoneOptions = {};
+    $(function () {
+        //为所有一级分类添加选项
+        $.ajax({
+            type: "GET",
+            url: "/cms/gate/options",
+            dataType: "json",
+            success: function (json) {
+                $.each(json, function (i, item) {
+                    secdoneOptions[item.id]=[];
+                    $("select[gate=gate]").append(
+                        '<option value="'+item.id+'">'+item.name+'</option>'
+                    )
+                })
+            }
+        });
+        //为所有一级分类绑定onchange事件
+        $("select[gate=gate]").change(function () {
+            changeOption(this);
+        });
+    })
+    function changeOption(s) {
+        var gateId = s.value;
+        if (secdoneOptions[gateId].length==0){
+            $.ajax({
+                type: "POST",
+                url: "/cms/category/options",
+                data: {"gateId":gateId},
+                dataType: "json",
+                success: function (json) {
+                    console.log(json);
+                    var nextSelect = $(s).parent().next().children("select").get(0);
+                    $(nextSelect).empty();
+                    $(nextSelect).append('<option>请选择</option>');
+                    $.each(json,function (i,item) {
+                        console.log(item);
+                        $(nextSelect).append('<option value="'+item.id+'">'+item.name+'</option>');
+                    })
+                }
+            })
+        }
+
+
+    }
+</script>
 </body>
 </html>

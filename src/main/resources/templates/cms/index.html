@@ -148,7 +148,7 @@
                     </li>
                     <li class="treeview " data-level="1">
                         <a style="padding-left:20px" class="nav-link"
-                            onclick="addTabs({id:'90012',title: '站点管理',close: true,url: 'site',urlType: 'relative'});">
+                            onclick="addSiteTabs({id:'90012',title: '站点管理',close: true,url: 'site',urlType: 'relative'});">
                             <i class="fa fa-circle-o"></i><span class="title menu-text">站点管理</span>
                         </a>
                     </li>
@@ -227,27 +227,24 @@
         function search_menu() {
             //要搜索的值
             var text = $('input[name=q]').val();
-
             var $ul = $('.sidebar-menu');
             $ul.find("a.nav-link").each(function () {
                 var $a = $(this).css("border", "");
-
                 //判断是否含有要搜索的字符串
                 if ($a.children("span.menu-text").text().indexOf(text) >= 0) {
-
                     //如果a标签的父级是隐藏的就展开
                     $ul = $a.parents("ul");
-
                     if ($ul.is(":hidden")) {
                         $a.parents("ul").prev().click();
                     }
-
                     //点击该菜单
                     $a.click().css("border", "1px solid");
-
-                    //                return false;
                 }
             });
+        }
+
+        function addSiteTabs(options){
+            addTabs(options);
         }
 
         $(function () {

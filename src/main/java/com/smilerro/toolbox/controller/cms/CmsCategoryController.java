@@ -12,6 +12,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -52,5 +53,11 @@ public class CmsCategoryController {
         model.addAttribute("categorys",categorys);
         model.addAttribute("gates",gates);
         return "cms/sonPage/category";
+    }
+    @RequestMapping("/options")
+    @ResponseBody
+    public  List<Category> options(String gateId){
+        List<Category> categories = categoryRepository.findByGate_Id(gateId);
+        return categories;
     }
 }

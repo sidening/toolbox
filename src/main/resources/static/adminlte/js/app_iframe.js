@@ -1471,7 +1471,6 @@ var addTabs = function (options) {
     }
 
     activeTabByPageId(pageId);
-
 };
 
 //关闭tab
