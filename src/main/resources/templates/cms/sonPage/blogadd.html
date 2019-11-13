@@ -9,20 +9,30 @@
 </head>
 <body>
 <div class="container-fluid">
-    <form id="article" class="form-inline" action="/cms/blog/save">
+    <form id="article" class="form-horizontal" action="/cms/blog/save">
         <div class="form-group">
-            <label>标题</label>
-            <input type="text" class="form-control" id="title">
+            <label for="title" class="col-sm-2 control-label">Email</label>
+            <div class="col-sm-10">
+                <input type="email" class="form-control" id="title" placeholder="Email">
+            </div>
         </div>
         <div class="form-group">
-            <label>标签</label>
-            <select id="lables" class="selectpicker" multiple>
-                <option value="1">广东省</option>
-                <option value="aaaaaaaa">广西省</option>
-                <option value="3">福建省</option>
-                <option value="4">湖南省</option>
-                <option value="5">山东省</option>
-            </select>
+            <label for="profile" class="col-sm-2 control-label">简介</label>
+            <div class="col-sm-10">
+                <textarea id="profile" class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="lables" class="col-sm-2 control-label">标签</label>
+            <div class="col-sm-10">
+                <select id="lables" class="selectpicker" multiple>
+                    <option value="1">广东省</option>
+                    <option value="aaaaaaaa">广西省</option>
+                    <option value="3">福建省</option>
+                    <option value="4">湖南省</option>
+                    <option value="5">山东省</option>
+                </select>
+            </div>
         </div>
         <!--编辑区-->
         <div id="layout">
