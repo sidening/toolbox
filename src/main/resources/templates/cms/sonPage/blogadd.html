@@ -27,7 +27,7 @@
         <!--编辑区-->
         <div id="layout">
             <div id="test-editormd">
-                <textarea style="display:none;"> ## Start Write Here...</textarea>
+                <textarea id="mdContent" style="display:none;"> ## Start Write Here...</textarea>
             </div>
         </div>
 
@@ -57,10 +57,14 @@
     });
     function commitArticle() {
         var url = $("#article").valueOf("cation");
-        var value = $('#lables').val();
-        console.log(value);
+        var lables = $('#lables').val();
         var data = {
             title:$("#title").value,
+            lables:lables,
+            mdContent:$("#mdContent").value,
+            pic:"",
+            profile:"",
+
         }
         $.ajax({
             type: "POST",
