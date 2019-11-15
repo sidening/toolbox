@@ -2,10 +2,9 @@ package com.smilerro.toolbox.entity.blog;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author ：Skf
@@ -35,6 +34,16 @@ public class Article {
     private String mainPic;
     //有效性
     private Integer status;
+    @OneToMany
+    private List<Lable> lables;
+
+    public List<Lable> getLables() {
+        return lables;
+    }
+
+    public void setLables(List<Lable> lables) {
+        this.lables = lables;
+    }
 
     public Integer getStatus() {
         return status;

@@ -4,10 +4,8 @@ import com.smilerro.toolbox.entity.Category;
 import com.smilerro.toolbox.entity.Gate;
 import com.smilerro.toolbox.entity.User;
 import com.smilerro.toolbox.entity.WebSite;
-import com.smilerro.toolbox.repository.CategoryRepository;
-import com.smilerro.toolbox.repository.GateRepository;
-import com.smilerro.toolbox.repository.UserRepository;
-import com.smilerro.toolbox.repository.WebSiteRepository;
+import com.smilerro.toolbox.entity.blog.Article;
+import com.smilerro.toolbox.repository.*;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -19,8 +17,9 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
-//@SpringBootTest
+@SpringBootTest
 class ToolboxApplicationTests {
     @Autowired
     CategoryRepository categoryRepository;
@@ -57,5 +56,14 @@ class ToolboxApplicationTests {
     }
 
 
+    @Autowired
+    ArticleRepository articleRepository;
+    @Test
+    void tt(){
+        Optional<Article> byId = articleRepository.findById("4028e0816e6db9b0016e6dba7bb30000");
+        Article article = byId.get();
+        System.out.println();
 
+
+    }
 }
