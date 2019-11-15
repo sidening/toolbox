@@ -9,23 +9,29 @@
 </head>
 <body>
 <div class="container-fluid">
-    <form id="article" class="form-horizontal" action="/cms/blog/save">
+    <form id="article" class="form-horizontal" enctype="multipart/form-data">
         <div class="form-group">
             <label for="title" class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-                <input type="email" class="form-control" id="title" placeholder="Email">
+                <input type="email" class="form-control" name="title" id="title" placeholder="Email">
             </div>
         </div>
         <div class="form-group">
             <label for="profile" class="col-sm-2 control-label">简介</label>
             <div class="col-sm-10">
-                <textarea id="profile" class="form-control" rows="3"></textarea>
+                <textarea id="profile" name="profile" class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+        <!--编辑区-->
+        <div id="layout">
+            <div id="test-editormd">
+                <textarea id="mdContent" name="mdContent" style="display:none;"> ## Start Write Here...</textarea>
             </div>
         </div>
         <div class="form-group">
             <label for="lables" class="col-sm-2 control-label">标签</label>
             <div class="col-sm-10">
-                <select id="lables" class="selectpicker" multiple>
+                <select id="lables" name="lables" class="selectpicker" multiple>
                     <option value="1">广东省</option>
                     <option value="aaaaaaaa">广西省</option>
                     <option value="3">福建省</option>
@@ -34,13 +40,9 @@
                 </select>
             </div>
         </div>
-        <!--编辑区-->
-        <div id="layout">
-            <div id="test-editormd">
-                <textarea id="mdContent" style="display:none;"> ## Start Write Here...</textarea>
-            </div>
+        <div class="file-loading">
+            <input id="file" name="file" type="file" multiple>
         </div>
-
     </form>
     <button onclick="commitArticle()" class="btn btn-default">保存</button>
 </div>
@@ -63,30 +65,16 @@
             imageFormats:["jpg", "jpeg", "gif", "png", "bmp", "webp"],
             imageUploadURL:"/php/upload.php"
         });
-
     });
     function commitArticle() {
-        var url = $("#article").valueOf("cation");
-        var lables = $('#lables').val();
-        var data = {
-            title:$("#title").value,
-            lables:lables,
-            mdContent:$("#mdContent").value,
-            pic:"",
-            profile:"",
+        var formdata=new FormData($("#article")[0]);
 
-        }
         $.ajax({
             type: "POST",
-            url: url,
+            url:  "/cms/blog/save",
             dataType: "json",
+            data: formdata,
             success: function (json) {
-                $.each(json, function (i, item) {
-                    secdoneOptions[item.id]=[];
-                    $("select[gate=gate]").append(
-                        '<option value="'+item.id+'">'+item.name+'</option>'
-                    )
-                })
             }
         });
     }

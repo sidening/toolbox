@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -23,8 +25,8 @@ public class CmsBlogController {
         return "cms/sonPage/blogadd";
     }
 
-    @RequestMapping("/save")
-    public String save(HttpServletRequest request, Model model){
+    @RequestMapping(value = "/save")
+    public String save(HttpServletRequest request, Model model,@RequestParam(value = "file") MultipartFile file){
         String lables = request.getParameter("lables");
         return "cms/sonPage/blogadd";
     }

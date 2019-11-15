@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-@SpringBootTest
+//@SpringBootTest
 class ToolboxApplicationTests {
     @Autowired
     CategoryRepository categoryRepository;
@@ -55,6 +55,7 @@ class ToolboxApplicationTests {
         }
 
     }
+
 
 
 }
