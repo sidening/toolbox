@@ -27,24 +27,19 @@
                 <td><textarea name="profile" class="form-control" rows="3"></textarea></td>
             </tr>
             <tr>
-                <td>主图</td>
+                <td>标签 <br>分类</td>
                 <td>
                     <div class="form-group">
-                        <input id="file" name="file" type="file" multiple>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>标签</td>
-                <td>
-                    <div class="form-group">
+                        标签:
                         <select id="lables" name="lables" class="selectpicker" multiple>
-                            <option value="1">广东省</option>
-                            <option value="2">广西省</option>
-                            <option value="3">福建省</option>
-                            <option value="4">湖南省</option>
-                            <option value="5">山东省</option>
+                            <option th:each="lable,index:${lables}" th:value="${lable.name}" th:text="${lable.name}"></option>
                         </select>
+
+                        分类:
+                        <select id="blogCate" name="blogCate.id" class="selectpicker" multiple>
+                            <option th:each="blogCate,index:${blogCates}" th:value="${blogCate.id}" th:text="${blogCate.title}"></option>
+                        </select>
+                        主图<input id="file" name="file" type="file" multiple>
                     </div>
                 </td>
             </tr>

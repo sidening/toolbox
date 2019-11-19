@@ -2,11 +2,9 @@ package com.smilerro.toolbox.controller.cms;
 
 import com.smilerro.toolbox.controller.BaseController;
 import com.smilerro.toolbox.entity.blog.Article;
+import com.smilerro.toolbox.entity.blog.BlogCate;
 import com.smilerro.toolbox.entity.blog.Lable;
-import com.smilerro.toolbox.repository.ArticleRepository;
-import com.smilerro.toolbox.repository.LableRepository;
-import com.smilerro.toolbox.repository.UserRepository;
-import com.smilerro.toolbox.repository.WebSiteRepository;
+import com.smilerro.toolbox.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -35,10 +33,18 @@ public class CmsBlogController extends BaseController {
     @Autowired
     private LableRepository lableRepository;
     @Autowired
+    BlogCateRepository blogCateRepository;
+    @Autowired
     private ArticleRepository articleRepository;
 
     @RequestMapping()
-    public String indexPage(){
+    public String indexPage(Model model){
+        //1.获取所有分类
+        List<BlogCate> blogCates = blogCateRepository.findAll();
+        model.addAttribute("blogCates",blogCates);
+        //2.获取所有标签
+        List<Lable> lables = lableRepository.findAll();
+        model.addAttribute("lables",lables);
         return "cms/sonPage/blogadd";
     }
 
@@ -86,4 +92,15 @@ public class CmsBlogController extends BaseController {
         }
     }
 
+    @RequestMapping("/saveLable")
+    public Map saveLable(@RequestBody Lable lable){
+        try{
+            Lable save = lableRepository.save(lable);
+            Map result = getResult(true);
+            result.put("lable",save);
+            return result;
+        }catch (Exception e){
+            return getResult(false);
+        }
+    }
 }

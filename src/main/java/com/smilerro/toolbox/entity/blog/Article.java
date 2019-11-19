@@ -19,8 +19,9 @@ public class Article {
     private String id;
 
     private String title;
-
-    // Markdown 正文内容
+    /**
+     * Markdown 正文内容
+     */
     private String mdContent;
     // 无语法格式正文内容 , 可用于全文检索
     private String contentNotFormat;
@@ -36,6 +37,19 @@ public class Article {
     private Integer status;
     @OneToMany
     private List<Lable> lables;
+    /**
+     * 分类
+     */
+    @ManyToOne
+    private BlogCate blogCate;
+
+    public BlogCate getBlogCate() {
+        return blogCate;
+    }
+
+    public void setBlogCate(BlogCate blogCate) {
+        this.blogCate = blogCate;
+    }
 
     public List<Lable> getLables() {
         return lables;
