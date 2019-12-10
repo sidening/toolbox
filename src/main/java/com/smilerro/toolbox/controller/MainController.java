@@ -25,7 +25,7 @@ import java.util.*;
  * @date ：Created in 2019/10/25 0025 10:41
  */
 @Controller
-@RequestMapping("/box")
+//@RequestMapping("/box")
 public class MainController {
     @Autowired
     WebSiteRepository webSiteRepository;
